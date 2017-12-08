@@ -110,14 +110,14 @@ public:
 		genesis.nVersion = 1;
 		genesis.nTime = 1512738019;
 		genesis.nBits = 520159231;
-		genesis.nNonce = 0;
+		genesis.nNonce = 66339;
 
 		hashGenesisBlock = genesis.GetHash();
 
-		//assert(genesis.hashMerkleRoot == uint256("0x59589791e1dfa32ca7fc0641f9c939d648774f1ded57c3803e0f3dd05f308679"));
-		//assert(hashGenesisBlock == uint256("0x0000ebc8051bff80f7946f4420efb219e66f66b89fdc1df0ed8a30b428bf0033"));
+		assert(genesis.hashMerkleRoot == uint256("0x6d22a7fd5e8e39046ef2d5c233faf0d48301cb294ecf8b77bbfef529834fddba"));
+		assert(hashGenesisBlock == uint256("0x0000ab3fce9be40c36c245abf292adaef175e9df15d728d3d7b3030733313352"));
 
-		MineGenesis(genesis);
+		//MineGenesis(genesis);
 
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 50);
 		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 85);
