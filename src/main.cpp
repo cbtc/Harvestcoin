@@ -1358,9 +1358,9 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
     int64_t nSubsidy = 3.5 * COIN;
 	if (nHeight == 2)
 		 {
-		nSubsidy = 1972800 * COIN;
+		nSubsidy = 10000000 * COIN;
 		}
-
+    
     return nSubsidy + nFees;
 
 }
@@ -1369,6 +1369,9 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
 int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees)
 {
     int64_t nSubsidy = STATIC_POS_REWARD;
+
+    nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 ; // 10000%
+
     return nSubsidy + nFees;
 }
 
@@ -1399,7 +1402,7 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
     if (pindexLast == NULL)
         return bnTargetLimit.GetCompact(); // genesis block
 
-	
+
     const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
     if (pindexPrev->pprev == NULL)
         return bnTargetLimit.GetCompact(); // first block
@@ -1977,7 +1980,7 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 #ifndef LOWMEM
     pindex->nMint = nValueOut - nValueIn + nFees;
     pindex->nMoneySupply = (pindex->pprev? pindex->pprev->nMoneySupply : 0) + nValueOut - nValueIn;
-#endif    
+#endif
     if (!txdb.WriteBlockIndex(CDiskBlockIndex(pindex)))
         return error("Connect() : WriteBlockIndex for pindex failed");
 
@@ -2383,7 +2386,7 @@ bool CBlock::AddToBlockIndex(unsigned int nFile, unsigned int nBlockPos, const u
     if (!ComputeNextStakeModifier(pindexNew->pprev, nStakeModifier, fGeneratedStakeModifier))
         return error("AddToBlockIndex() : ComputeNextStakeModifier() failed");
     pindexNew->SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
-    
+
     // Add to mapBlockIndex
     map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.insert(make_pair(hash, pindexNew)).first;
     if (pindexNew->IsProofOfStake())
@@ -3119,7 +3122,7 @@ void PrintBlockTree()
         LogPrintf("%d (%u,%u) %s  %08x  %s  mint %7s  tx %u",
 #else
         LogPrintf("%d (%u,%u) %s  %08x  %s  tx %u",
-#endif        
+#endif
             pindex->nHeight,
             pindex->nFile,
             pindex->nBlockPos,
@@ -3128,7 +3131,7 @@ void PrintBlockTree()
             DateTimeStrFormat("%x %H:%M:%S", block.GetBlockTime()),
 #ifndef LOWMEM
             FormatMoney(pindex->nMint),
-#endif            
+#endif
             block.vtx.size());
 
         // put the main time-chain first
@@ -3712,7 +3715,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
                 break;
             }
         }
-        
+
         LOCK(cs_main);
         CTxDB txdb("r");
 
@@ -4485,7 +4488,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue)
 {
     int64_t ret = blockValue * 2/3; //67%
-	
+
 	if(nHeight>21000)
        ret = blockValue * 4/5; //80%
 

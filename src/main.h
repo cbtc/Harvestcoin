@@ -17,8 +17,8 @@
 
 class CValidationState;
 
-#define START_MASTERNODE_PAYMENTS_TESTNET 1428034047 //Fri, 09 Jan 2015 21:05:58 GMT
-#define START_MASTERNODE_PAYMENTS 1508858115 //24 Oct 2017 15:15:15 GMT
+#define START_MASTERNODE_PAYMENTS_TESTNET 1512830626 //Saturday, 9 de December de 2017 14:43:46
+#define START_MASTERNODE_PAYMENTS 1512830626 //Saturday, 9 de December de 2017 14:43:46 GMT
 
 static const int64_t DARKSEND_COLLATERAL = (0.01*COIN);
 static const int64_t DARKSEND_POOL_MAX = (4999.99*COIN);
@@ -30,10 +30,10 @@ static const int64_t STAKE_TIMESPAN_SWITCH_TIME = 1508858115;
 static const int64_t STAKE_TIMESPAN_SWITCH_TIME1 = 1509555600; //1 Nov 2017 17:00:00 GMT
 static const int64_t FORK_TIME = 1510059600;  //November 7, 2017 1:00:00 PM GMT
 
+static const int64_t COIN_YEAR_REWARD = 1000 * CENT;
 
 #define INSTANTX_SIGNATURES_REQUIRED           10
 #define INSTANTX_SIGNATURES_TOTAL              15
-
 
 class CBlock;
 class CBlockIndex;
@@ -66,7 +66,7 @@ static const int64_t MIN_TX_FEE = 1000;
 /** Fees smaller than this (in satoshi) are considered zero fee (for relaying) */
 static const int64_t MIN_RELAY_TX_FEE = MIN_TX_FEE;
 /** No amount larger than this (in satoshi) is valid */
-static const int64_t MAX_MONEY = 10000000 * COIN; // 1M PoW coins
+static const int64_t MAX_MONEY = 5000000000 * COIN; // 1M PoW coins
 inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
@@ -1116,11 +1116,11 @@ public:
         return strprintf("CBlockIndex(nprev=%p, pnext=%p, nFile=%u, nBlockPos=%-6d nHeight=%d, nMint=%s, nMoneySupply=%s, nFlags=(%s)(%d)(%s), nStakeModifier=%016x, hashProof=%s, prevoutStake=(%s), nStakeTime=%d merkle=%s, hashBlock=%s)",
 #else
         return strprintf("CBlockIndex(nprev=%p, pnext=%p, nFile=%u, nBlockPos=%-6d nHeight=%d, nFlags=(%s)(%d)(%s), nStakeModifier=%016x, hashProof=%s, prevoutStake=(%s), nStakeTime=%d merkle=%s, hashBlock=%s)",
-#endif        
+#endif
             pprev, pnext, nFile, nBlockPos, nHeight,
 #ifndef LOWMEM
             FormatMoney(nMint), FormatMoney(nMoneySupply),
-#endif           
+#endif
             GeneratedStakeModifier() ? "MOD" : "-", GetStakeEntropyBit(), IsProofOfStake()? "PoS" : "PoW",
             nStakeModifier,
             hashProof.ToString(),

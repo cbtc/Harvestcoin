@@ -128,7 +128,9 @@ public:
 
 		//vSeeds.push_back(CDNSSeedData("0", "107.170.198.173"));
 		//vSeeds.push_back(CDNSSeedData("1", "192.81.214.238"));
-		vSeeds.push_back(CDNSSeedData("0",  "192.168.1.101"));
+		vSeeds.push_back(CDNSSeedData("0",  "188.166.172.111"));
+		vSeeds.push_back(CDNSSeedData("1",  "88.20.74.19"));
+		
 		convertSeeds(vFixedSeeds, pnSeed, ARRAYLEN(pnSeed), nDefaultPort);
 
 		nPoolMaxTransactions = 3;
