@@ -39,7 +39,7 @@ win32:OPENSSL_LIB_PATH=C:/deps/openssl-1.0.2
 win32:MINIUPNPC_INCLUDE_PATH=C:/deps/
 win32:MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
 win32:QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.4
-win32:QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.4/.libs		
+win32:QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.4/.libs
 
 OBJECTS_DIR = build
 MOC_DIR = build
